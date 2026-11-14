@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="theme-color" content="#101524" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23ffcb54'/%3E%3Ctext x='50' y='73' text-anchor='middle' font-family='sans-serif' font-weight='900' font-size='70' fill='%2315202e'%3ER%3C/text%3E%3C/svg%3E" />
+  <title>Rumble Club — Tiny legends. Big energy.</title>
+  <link rel="preload" href="assets/fonts/outfit.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/bungee.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main id="app" class="selecting">
+    <canvas id="scene" aria-label="3D Rumble Club arena"></canvas>
+    <div class="grain"></div>
+    <section id="select-screen" class="screen">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="Rumble Club home"><span class="brand-mark">R</span><span>RUMBLE<span class="brand-light"> CLUB</span></span></a>
+        <div class="top-note"><span class="live-dot"></span> THE ARENA IS OPEN</div>
+        <button class="sound-toggle" id="sound-toggle" aria-label="Toggle sound">♫ <span>SOUND ON</span></button>
+      </header>
+      <div class="selection-layout">
+        <section class="intro-copy">
+          <div class="eyebrow"><span class="eyebrow-line"></span> PICK YOUR CREW <span class="eyebrow-count">01 / 02</span></div>
+          <h1>SMALL<br>FIGHT.<br><em>BIG</em> FEELING.</h1>
+          <p class="intro-desc">Seven wildly different contenders.<br>One very tiny arena. Make some noise.</p>
+          <div class="roster-label"><span>YOUR ROSTER</span><span id="team-count">0 / 3 SELECTED</span></div>
+          <div class="roster-grid" id="roster-grid"></div>
+          <div class="roster-hint">CHOOSE UP TO 3 · THE REST FIGHT BACK</div>
+        </section>
+        <section class="showcase-wrap">
+          <div class="showcase-topline"><span><i class="sparkle">✦</i> THE CONTENDERS</span><span class="showcase-index" id="showcase-index">01 — 07</span></div>
+          <div class="showcase-scene">
+            <div class="stage-ring ring-one"></div><div class="stage-ring ring-two"></div>
+            <div class="showcase-spot"></div>
+            <div class="selected-tag"><span class="tag-dot"></span><span id="selected-tag-text">READY TO RUMBLE</span></div>
+            <button class="showcase-arrow arrow-left" id="prev-character" aria-label="Previous contender">‹</button>
+            <button class="showcase-arrow arrow-right" id="next-character" aria-label="Next contender">›</button>
+          </div>
+          <div class="showcase-info">
+            <div class="fighter-heading"><div><div class="fighter-kicker" id="fighter-kicker">CONTENDER NO. 01</div><h2 id="fighter-name">HÜSEYİN</h2></div><div class="fighter-type" id="fighter-type">THE STEADY ONE</div></div>
+            <p id="fighter-bio">A patient, grounded fighter. He takes his time, then makes every hit count.</p>
+            <div class="stats-row" id="stats-row"></div>
+          </div>
+          <button class="start-button" id="start-button"><span>ENTER THE ARENA</span><span class="button-arrow">↗</span></button>
+          <div class="controls-note"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span><span>MOVE</span><span class="keycap key-wide">SPACE</span><span>ATTACK</span></div>
+        </section>
+      </div>
+      <footer class="select-footer"><span>GOOD SPORTSMANSHIP. GREAT HAIR.</span><span>RUMBLE CLUB · EST. RIGHT NOW</span><span>✦ MADE FOR THE JOY OF IT</span></footer>
+    </section>
+    <section id="battle-screen" class="screen hidden">
+      <header class="battle-hud">
+        <div class="team-hud team-blue"><div class="hud-label"><span>YOUR CREW</span><b id="blue-score">0 / 0</b></div><div class="team-health" id="blue-health"></div></div>
+        <div class="arena-title"><span class="arena-live"><i></i> LIVE</span><b>THE<br>PLAYPEN</b><span id="battle-timer">00:00</span></div>
+        <div class="team-hud team-red"><div class="hud-label"><b id="red-score">0 / 0</b><span>CHALLENGERS</span></div><div class="team-health" id="red-health"></div></div>
+        <button class="exit-button" id="exit-button" aria-label="Exit battle">×</button>
+      </header>
+      <div class="battle-banner" id="battle-banner"><span class="banner-star">✦</span><span id="banner-text">LET'S GET THIS PARTY STARTED</span><span class="banner-star">✦</span></div>
+      <div class="active-fighter" id="active-fighter"><span class="active-dot"></span><span>YOU'RE CONTROLLING</span><b id="active-name">HÜSEYİN</b><span class="switch-hint">TAP 1–3 TO SWITCH</span></div>
+      <div class="touch-controls" id="touch-controls">
+        <div class="joystick" id="joystick"><div class="joy-ring"><div class="joy-knob" id="joy-knob"></div></div><span class="joy-label">MOVE</span></div>
+        <button class="attack-button" id="attack-button"><span class="attack-icon">✦</span><b>WHACK!</b><small>ATTACK</small></button>
+      </div>
+      <div class="battle-bottom"><span>WASD MOVE <i>·</i> SPACE ATTACK</span><span id="battle-tip">Stay close to land a hit!</span></div>
+      <div class="result-modal hidden" id="result-modal"><div class="result-card"><div class="result-eyebrow">THAT WAS A GOOD ONE</div><div class="result-icon" id="result-icon">✦</div><h2 id="result-title">VICTORY!</h2><p id="result-copy">The crowd is absolutely losing it.</p><div class="result-actions"><button class="again-button" id="rematch-button">RUN IT BACK <span>↻</span></button><button class="back-button" id="back-to-select">PICK A NEW CREW <span>→</span></button></div></div></div>
+    </section>
+    <div class="toast" id="toast"></div>
+  </main>
+  <script type="module" src="js/game.js"></script>
+</body>
+</html>
